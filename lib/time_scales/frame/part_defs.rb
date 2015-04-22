@@ -1,21 +1,19 @@
 module TimeScales
   module Frame
-
     class PartDefs
-
       class << self
         private :new
 
         def from_key_value_map(kvm)
-          part_defs = kvm.map { |part_key, value|
-            PartDef.new( part_key, value )
-          }
-          new( part_defs )
+          part_defs = kvm.map do |part_key, value|
+            PartDef.new(part_key, value)
+          end
+          new(part_defs)
         end
 
         def from_keys(part_keys)
           part_defs = part_keys.map { |key| PartDef.new(key) }
-          new( part_defs )
+          new(part_defs)
         end
       end
 
@@ -24,11 +22,11 @@ module TimeScales
       end
 
       def parts
-        @parts ||= assembly_sequence.map { |pd| pd.part }
+        @parts ||= assembly_sequence.map(&:part)
       end
 
       def part_values
-        assembly_sequence.map { |pd| pd.value }
+        assembly_sequence.map(&:value)
       end
 
       private
@@ -40,14 +38,12 @@ module TimeScales
         @assembly_sequence ||= begin
           seq = part_defs.sort_by { |ps| -ps.scale }
           seq.first.outer_scope!
-          seq[0..-2].zip( seq[1..-1] ).each do |a,b|
+          seq[0..-2].zip(seq[1..-1]).each do |a, b|
             b.component_of! a.part
           end
           seq
         end
       end
-
     end
-
   end
 end

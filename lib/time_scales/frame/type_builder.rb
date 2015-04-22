@@ -1,11 +1,7 @@
 module TimeScales
-
   module Frame
-
     class TypeBuilder
-
       class << self
-
         private
 
         def add_type_cache
@@ -13,13 +9,12 @@ module TimeScales
           # from any instance.
           _type_cache = {}
 
-          define_method(:type_cache){
+          define_method(:type_cache) do
             _type_cache
-          }
+          end
 
           private :type_cache
         end
-
       end
 
       add_type_cache
@@ -31,17 +26,17 @@ module TimeScales
       end
 
       def call
-        type_cache.fetch( parts ) {
+        type_cache.fetch(parts) do
           type_cache[parts] = build_type
-        }
+        end
       end
 
       private
 
       def build_type
-        _parts = parts ; _is_scheme_scoped = scheme_scoped?
+        _parts = parts; _is_scheme_scoped = scheme_scoped?
         klass = Class.new type_base_class do
-          _parts.each do |part| ; include part.component_mixin ; end
+          _parts.each { |part|; include part.component_mixin; }
           include _parts.last.scheme_scoped_precision_mixin if _is_scheme_scoped
         end
         Frame.const_set type_const_name, klass
@@ -62,12 +57,10 @@ module TimeScales
 
       def type_const_name
         const_name = "#{parts.first.name}"
-        parts[1..-1].each do |part| ; const_name << "_#{part.subdivision_name}" ; end
+        parts[1..-1].each { |part|; const_name << "_#{part.subdivision_name}"; }
         const_name << 'Only' if parts.length == 1
         const_name << '__Auto'
       end
     end
-
   end
-
 end

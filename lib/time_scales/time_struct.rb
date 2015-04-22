@@ -1,11 +1,10 @@
 module TimeScales
-
   class TimeStruct < Struct.new(
     :year,
     :month,
     :day,
     :hour,
-    :minute,
+    :minute
   )
 
     def normalize
@@ -62,7 +61,5 @@ module TimeScales
       t = Time.new(year, 3, 1)
       t.yday - 32
     end
-
   end
-
 end

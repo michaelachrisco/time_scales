@@ -1,11 +1,9 @@
 module TimeScales
   module Frame
-
     module Precisions
-
       module HasYearOfSchemePrecision
         def succ_begin_time
-          @end_time ||= Time.new( begin_time.year + 1 )
+          @end_time ||= Time.new(begin_time.year + 1)
         end
       end
 
@@ -14,10 +12,8 @@ module TimeScales
           @succ_begin_time ||= begin
             succ_y = year_of_scheme
             succ_m = begin_time.month + n_months_precision
-            if succ_m > 12
-              succ_y += 1 ; succ_m = 1
-            end
-            Time.new( succ_y, succ_m )
+            succ_y += 1; succ_m = 1 if succ_m > 12
+            Time.new(succ_y, succ_m)
           end
         end
 
@@ -26,7 +22,7 @@ module TimeScales
         # Precision unit size in months. A year must be divisible
         # by this value.
         def n_months_precision
-          raise NotImplementedError, "Subclass responsibility"
+          fail NotImplementedError, 'Subclass responsibility'
         end
       end
 
@@ -76,8 +72,6 @@ module TimeScales
           @succ_begin_time ||= begin_time + SECONDS_PER_MINUTE
         end
       end
-
     end
-
   end
 end

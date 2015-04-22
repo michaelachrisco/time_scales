@@ -1,8 +1,6 @@
 module TimeScales
   module Frame
-
     module PartComponents
-
       module HasYearOfScheme
         def self.included(other)
           other.extend HasYearOfScheme::ClassMixin
@@ -10,13 +8,13 @@ module TimeScales
 
         attr_reader :year_of_scheme
 
-        alias year year_of_scheme
+        alias_method :year, :year_of_scheme
 
         private
 
         def _initialize(args_array)
           super
-          @year_of_scheme = ensure_fixnum( args_array.shift )
+          @year_of_scheme = ensure_fixnum(args_array.shift)
         end
 
         def prepare_time_struct(struct)
@@ -40,13 +38,13 @@ module TimeScales
 
         attr_reader :month_of_year
 
-        alias month month_of_year
+        alias_method :month, :month_of_year
 
         private
 
         def _initialize(args_array)
           super
-          @month_of_year = ensure_fixnum( args_array.shift )
+          @month_of_year = ensure_fixnum(args_array.shift)
         end
 
         def prepare_time_struct(struct)
@@ -70,13 +68,13 @@ module TimeScales
 
         attr_reader :day_of_month
 
-        alias day day_of_month
+        alias_method :day, :day_of_month
 
         private
 
         def _initialize(args_array)
           super
-          @day_of_month = ensure_fixnum( args_array.shift )
+          @day_of_month = ensure_fixnum(args_array.shift)
         end
 
         def prepare_time_struct(struct)
@@ -100,13 +98,13 @@ module TimeScales
 
         attr_reader :day_of_year
 
-        alias day day_of_year
+        alias_method :day, :day_of_year
 
         private
 
         def _initialize(args_array)
           super
-          @day_of_year = ensure_fixnum( args_array.shift )
+          @day_of_year = ensure_fixnum(args_array.shift)
         end
 
         def prepare_time_struct(struct)
@@ -130,13 +128,13 @@ module TimeScales
 
         attr_reader :hour_of_day
 
-        alias hour hour_of_day
+        alias_method :hour, :hour_of_day
 
         private
 
         def _initialize(args_array)
           super
-          @hour_of_day = ensure_fixnum( args_array.shift )
+          @hour_of_day = ensure_fixnum(args_array.shift)
         end
 
         def prepare_time_struct(struct)
@@ -160,13 +158,13 @@ module TimeScales
 
         attr_reader :minute_of_hour
 
-        alias minute minute_of_hour
+        alias_method :minute, :minute_of_hour
 
         private
 
         def _initialize(args_array)
           super
-          @minute_of_hour = ensure_fixnum( args_array.shift )
+          @minute_of_hour = ensure_fixnum(args_array.shift)
         end
 
         def prepare_time_struct(struct)
@@ -190,13 +188,13 @@ module TimeScales
 
         attr_reader :month_of_quarter
 
-        alias month month_of_quarter
+        alias_method :month, :month_of_quarter
 
         private
 
         def _initialize(args_array)
           super
-          @month_of_quarter = ensure_fixnum( args_array.shift )
+          @month_of_quarter = ensure_fixnum(args_array.shift)
         end
 
         def prepare_time_struct(struct)
@@ -220,13 +218,13 @@ module TimeScales
 
         attr_reader :quarter_of_year
 
-        alias quarter quarter_of_year
+        alias_method :quarter, :quarter_of_year
 
         private
 
         def _initialize(args_array)
           super
-          @quarter_of_year = ensure_fixnum( args_array.shift )
+          @quarter_of_year = ensure_fixnum(args_array.shift)
         end
 
         def prepare_time_struct(struct)
@@ -251,8 +249,6 @@ module TimeScales
           end
         end
       end
-
     end
-
   end
 end
